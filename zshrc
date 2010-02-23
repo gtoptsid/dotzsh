@@ -264,6 +264,13 @@ zstyle ':completion:*' group-order builtins functions commands
 # Για να γίνει αυτό δεν πρέπει να χρησιμοποιείται ο συμπληρωτής _ignored.
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
+# Ταξινομεί τα αποτελέσματα με βάση το όνομά τους
+# zstyle ':completion:*' file-sort name
+# Ενεργοποίηση της συμπλήρωσης μενού για αριθμό αποτελεσμάτων > 10
+# zstyle ':completion:*' menu select=10
+# Ενεργοποίηση της συμπλήρωσης μενού για αριθμό αποτελεσμάτων > μία οθόνη
+# zstyle ':completion:*' menu select=long
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
