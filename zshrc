@@ -203,3 +203,17 @@ alias -s ps=gv
 alias -s {avi,mpg,MPG,mkv,wmv,mp3,ogg}=mplayer
 
 # }}}
+
+# Δήλωση ψευδωνύμων καταλόγων (named directories) # {{{
+
+# % cd ~T ισοδυναμεί με % cd ~/torrents/done
+# Αν είναι ενεργοποιημένο το cdable_vars τότε θα λειτουργεί και το % cd T
+# Αν είναι ενεργοποιημένο και το auto_cd τότε θα λειτουργεί και το % T
+hash -d T=~/torrents/done
+hash -d I=~/.aMule/Incoming
+hash -d G=/home/git/repos
+hash -d M=/home/git/mine
+hash -d log=/var/log
+hash -d pac=/var/log/packages
+
+# }}}
