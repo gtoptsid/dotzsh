@@ -46,17 +46,26 @@ export PS1 PS2
 
 # Λειτουργίες πλήκτρων {{{
 
+# Η επιλογή του keymap γίνεται αυτόματα με βάση την μεταβλητή VISUAL
+# Εδώ δηλώνουμε χειροκίνητα ότι επιθυμούμε πλήκτρα με βάση τον emacs
 bindkey -e
+
+# Home/End linux console
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
+# Home/End rxvt
 bindkey "\e[7~" beginning-of-line
 bindkey "\e[8~" end-of-line
+# Home/End BSD
 bindkey "\eOH" beginning-of-line
 bindkey "\eOF" end-of-line
+# Home/End xterm
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
+# Insert/Delete
 bindkey "\e[2~" quoted-insert
 bindkey "\e[3~" delete-char
+# Page Up/Down
 bindkey "\e[5~" beginning-of-history
 bindkey "\e[6~" end-of-history
 
