@@ -41,10 +41,7 @@ PATH="/usr/local/bin:/usr/bin:/bin:/usr/games"
 
 # Προσθέτει καταλόγους που χρειάζονται στον υπερχρήστη
 if [ "`id -u`" = "0" ]; then
-  echo $PATH | grep /usr/local/sbin 1> /dev/null 2> /dev/null
-  if [ ! $? = 0 ]; then
-    PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH
-  fi
+  PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH
 fi
 
 # Τα αρχεία στο /etc/profile.d δηλώνουν την μεταβλητή PATH και άλλες
