@@ -1,4 +1,11 @@
-# Set the values for some environment variables:
+# vim:filetype=zsh:foldmethod=marker
+################################################################
+# Ο κάθε marker ανοίγει με zo και κλείνει με zc. Το zR ανοίγει #
+# όλους τους markers ταυτόχρονα ενώ το zM τους κλείνει.        #
+################################################################
+
+# Δήλωση μεταβλητών {{{
+
 export MINICOM="-c on"
 export MANPATH=/usr/local/man:/usr/man
 export HOSTNAME="`cat /etc/HOSTNAME`"
@@ -10,7 +17,8 @@ if [ ! -r "$HOME/.inputrc" ]; then
   export INPUTRC=/etc/inputrc
 fi
 
-# Set the default system $PATH:
+# Μεταβλητή PATH {{{
+
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/games"
 
 # For root users, ensure that /usr/local/sbin, /usr/sbin, and /sbin are in
@@ -22,6 +30,21 @@ if [ "`id -u`" = "0" ]; then
     PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH
   fi
 fi
+
+# Append any additional sh scripts found in /etc/profile.d/:
+for profile_script in /etc/profile.d/*.sh ; do
+  if [ -x $profile_script ]; then
+    . $profile_script
+  fi
+done
+unset profile_script
+
+# For non-root users, add the current directory to the search path:
+if [ ! "`id -u`" = "0" ]; then
+ PATH="$PATH:."
+fi
+
+# }}}
 
 # Set TERM to linux for unknown type or unset variable:
 if [ "$TERM" = "" -o "$TERM" = "unknown" ]; then
@@ -37,19 +60,12 @@ fi
 
 export PATH DISPLAY TERM
 
+# }}}
+
+# umask {{{
+
 # Default umask.  A umask of 022 prevents new files from being created group
 # and world writable.
 umask 022
 
-# Append any additional sh scripts found in /etc/profile.d/:
-for profile_script in /etc/profile.d/*.sh ; do
-  if [ -x $profile_script ]; then
-    . $profile_script
-  fi
-done
-unset profile_script
-
-# For non-root users, add the current directory to the search path:
-if [ ! "`id -u`" = "0" ]; then
- PATH="$PATH:."
-fi
+# }}}
