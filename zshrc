@@ -242,6 +242,9 @@ zmodload zsh/complist
 autoload -Uz compinit
 compinit
 
+# Απενεργοποίηση του παλαιού τρόπου συμπλήρωσης
+zstyle ':completion:*' use-compctl false
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
