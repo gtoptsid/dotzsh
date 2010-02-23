@@ -1,3 +1,7 @@
+# /etc/zshenv: Το παρόν αρχείο διαβάζεται από όλα τα είδη κελύφους επομένως
+# θα πρέπει να έχει μόνο δηλώσεις μεταβλητών και εντολές που δεν παράγουν
+# έξοδο γιατί μπορεί να μην υπάρχει tty (π.χ σύνοδος sftp)
+
 # vim:filetype=zsh:foldmethod=marker
 ################################################################
 # Ο κάθε marker ανοίγει με zo και κλείνει με zc. Το zR ανοίγει #
@@ -6,18 +10,20 @@
 
 # Δήλωση μεταβλητών {{{
 
+# Ορίζει σε ποιους καταλόγους θα ψάχνει η εντολή man για manpages
 export MANPATH=/usr/local/man:/usr/man
 export HOSTNAME="`cat /etc/HOSTNAME`"
 export LESSOPEN="|lesspipe.sh %s"
+# Αλλάζει την λειτουργία του less ώστε να δίνει περισσότερες πληροφορίες
 export LESS="-M"
 
 # Μεταβλητή PATH {{{
 
+# Η μεταβλητή PATH χρησιμοποιείται για την αυτόματη εύρεση προγραμμάτων.
+# Στο zsh η μεταβλητή path είναι array και είναι συνδεδεμένη με την PATH
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/games"
 
-# For root users, ensure that /usr/local/sbin, /usr/sbin, and /sbin are in
-# the $PATH.  Some means of connection don't add these by default (sshd comes
-# to mind).
+# Προσθέτει καταλόγους που χρειάζονται στον υπερχρήστη
 if [ "`id -u`" = "0" ]; then
   echo $PATH | grep /usr/local/sbin 1> /dev/null 2> /dev/null
   if [ ! $? = 0 ]; then
@@ -25,7 +31,10 @@ if [ "`id -u`" = "0" ]; then
   fi
 fi
 
-# Append any additional sh scripts found in /etc/profile.d/:
+# Τα αρχεία στο /etc/profile.d δηλώνουν την μεταβλητή PATH και άλλες
+# μεταβλητές οπότε η εισαγωγή τους μπορεί να γίνει εδώ. Αν στο μέλλον
+# κάποιο αρχείο παράγει έξοδο τότε το παρόν τμήμα θα πρέπει να μεταφερθεί
+# στο zshrc
 for profile_script in /etc/profile.d/*.sh ; do
   if [ -x $profile_script ]; then
     . $profile_script
@@ -33,14 +42,18 @@ for profile_script in /etc/profile.d/*.sh ; do
 done
 unset profile_script
 
-# For non-root users, add the current directory to the search path:
+# Για τον απλό χρήστη, προστίθεται στην PATH ο τρέχων κατάλογος ώστε να μπορεί
+# να εκτελεί προγράμματα που βρίσκονται στον κατάλογο του. Για λόγους ασφαλείας
+# καλό είναι ο τρέχων κατάλογος να βρίσκεται πάντα στο τέλος της PATH για αυτό
+#  και το παρόν τμήμα εκτελείται τελευταίο.
 if [ ! "`id -u`" = "0" ]; then
  PATH="$PATH:."
 fi
 
 # }}}
 
-# Set TERM to linux for unknown type or unset variable:
+# Ορισμός της μεταβλητής TERM επειδή κάποιες φορές αποτυγχάνει ο αυτόματος
+# ορισμός της και αυτό δημιουργεί προβλήματα
 if [ "$TERM" = "" -o "$TERM" = "unknown" ]; then
  TERM=linux
 fi
@@ -50,9 +63,7 @@ export PATH DISPLAY TERM
 # }}}
 
 # umask {{{
-
-# Default umask.  A umask of 022 prevents new files from being created group
-# and world writable.
+# Θέτει την umask σε 022 (rw-r--r--)
 umask 022
 
 # }}}
