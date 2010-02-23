@@ -247,6 +247,23 @@ zstyle ':completion:*' use-compctl false
 
 # zstyle ':completion:<function>:<completer>:<command>:<args>:<tag>'
 
+# Η συμπλήρωση γίνεται πιο περιγραφική
+zstyle ':completion:*' verbose true
+# Κατά την συμπλήρωση παραμέτρων εμφανίζεται και η περιγραφή τους
+zstyle ':completion:*:options' description true
+# Αν η συμπλήρωση δεν έχει αποτελέσματα εμφανίζει ενημερωτικό μήνυμα
+zstyle ':completion:*:warnings' format 'Δεν βρέθηκε %d'
+# Εμφανίζει τι είδους συμπλήρωση επιχειρείται
+zstyle ':completion:*:descriptions' format 'Συμπληρώνεται %d'
+# Χωρίζει τα αποτελέσματα με βάση τα tags τους
+zstyle ':completion:*' group-name ''
+# Ο χωρισμός γίνεται με την παρακάτω σειρά
+zstyle ':completion:*' group-order builtins functions commands
+# Η συμπλήρωση των συναρτήσεων θα αγνοεί ό,τι αρχείο αρχίζει από _
+# έτσι δεν θα εμφανίζονται οι εσωτερικές συναρτήσεις συμπλήρωσης του zsh.
+# Για να γίνει αυτό δεν πρέπει να χρησιμοποιείται ο συμπληρωτής _ignored.
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
