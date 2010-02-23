@@ -299,6 +299,10 @@ zstyle ':completion:*' completer _complete _prefix _files
 # τον foo)
 zstyle ':completion:*:*:cd:*' ignore-parents pwd parent
 
+# Εφόσον τα αρχεία αντικειμένων (.o) και βιβλιοθηκών (.a και .so*) δεν είναι
+# αρχεία κειμένου εξαιρούνται από την εμφάνιση στην συμπλήρωση κειμενογράφων.
+zstyle ':completion:*:*:(vi|less|more):*' ignored-patterns '*.(o|a|so*)'
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
