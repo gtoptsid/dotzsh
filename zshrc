@@ -193,4 +193,13 @@ alias -g G="|grep"
 alias -g L="|less"
 alias -g S="|sort"
 
+# Βολικές συσχετίσεις επεκτάσεων
+# π.χ % arxeio.pdf ισοδυναμεί με okular arxeio.pdf
+alias -s tar.bz2="tar jxvf"
+alias -s tar.gz="tar zxvf"
+alias -s rar="rar x"
+alias -s pdf=okular
+alias -s ps=gv
+alias -s {avi,mpg,MPG,mkv,wmv,mp3,ogg}=mplayer
+
 # }}}
