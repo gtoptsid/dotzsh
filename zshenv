@@ -15,7 +15,23 @@ export MANPATH=/usr/local/man:/usr/man
 export HOSTNAME="`cat /etc/HOSTNAME`"
 export LESSOPEN="|lesspipe.sh %s"
 # Αλλάζει την λειτουργία του less ώστε να δίνει περισσότερες πληροφορίες
-export LESS="-M"
+# και να τερματίζει αν η έξοδος δεν καλύπτει μια ολόκληρη σελίδα
+export LESS="-FMRX"
+# Απενεργοποιεί το αρχείο ιστορικού του less
+export LESSHISTFILE="-"
+# Εγκαθιστά μόνο την Ελληνική γλώσσα κατά το compile προγραμμάτων
+export LINGUAS="el"
+export PAGER="less"
+export EDITOR="vim"
+
+# Ορίζει τον μέγιστο αριθμό καταχωρήσεων ιστορικού που θα κρατά το κέλυφος
+# κατά την λειτουργία του σε 1000
+export HISTSIZE=1000
+# Απενεργοποιεί την αποθήκευση των καταχωρήσεων ιστορικού κατά την έξοδο
+export SAVEHIST=0
+# Το ιστορικό θα αποθηκεύεται στο αρχείο .zsh_history (εφόσον το SAVEHIST
+# δεν είναι 0)
+export HISTFILE=~/.zsh_history
 
 # Μεταβλητή PATH {{{
 
@@ -49,6 +65,9 @@ unset profile_script
 if [ ! "`id -u`" = "0" ]; then
  PATH="$PATH:."
 fi
+
+# Αφαιρεί τις διπλές καταχωρήσεις
+typeset -U path manpath PATH MANPATH
 
 # }}}
 
