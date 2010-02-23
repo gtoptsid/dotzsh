@@ -40,7 +40,7 @@ export HISTFILE=~/.zsh_history
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/games"
 
 # Προσθέτει καταλόγους που χρειάζονται στον υπερχρήστη
-if [ "`id -u`" = "0" ]; then
+if [[ $EUID == 0 ]]; then
   PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH
 fi
 
@@ -48,10 +48,9 @@ fi
 # μεταβλητές οπότε η εισαγωγή τους μπορεί να γίνει εδώ. Αν στο μέλλον
 # κάποιο αρχείο παράγει έξοδο τότε το παρόν τμήμα θα πρέπει να μεταφερθεί
 # στο zshrc
-for profile_script in /etc/profile.d/*.sh ; do
-  if [ -x $profile_script ]; then
-    . $profile_script
-  fi
+# Το (x) είναι modifier που εμφανίζει μόνο τα εκτελέσιμα αρχεία
+for profile_script in /etc/profile.d/*.sh(x) ; do
+  . $profile_script
 done
 unset profile_script
 
@@ -59,7 +58,7 @@ unset profile_script
 # να εκτελεί προγράμματα που βρίσκονται στον κατάλογο του. Για λόγους ασφαλείας
 # καλό είναι ο τρέχων κατάλογος να βρίσκεται πάντα στο τέλος της PATH για αυτό
 #  και το παρόν τμήμα εκτελείται τελευταίο.
-if [ ! "`id -u`" = "0" ]; then
+if [[ $EUID != 0 ]]; then
  PATH="$PATH:."
 fi
 
@@ -70,7 +69,7 @@ typeset -U path manpath PATH MANPATH
 
 # Ορισμός της μεταβλητής TERM επειδή κάποιες φορές αποτυγχάνει ο αυτόματος
 # ορισμός της και αυτό δημιουργεί προβλήματα
-if [ "$TERM" = "" -o "$TERM" = "unknown" ]; then
+if [[ -z $TERM || $TERM == "unknown" ]]; then
  TERM=linux
 fi
 
