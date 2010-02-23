@@ -217,3 +217,50 @@ hash -d log=/var/log
 hash -d pac=/var/log/packages
 
 # }}}
+
+# Χρήσιμες συναρτήσεις # {{{
+
+# Αναβάθμιση πολλών repositories ταυτόχρονα
+pull()
+{
+	while [[ -n $1 ]]; do
+		echo Processing $1
+		cd $1
+		if [[ -d .git ]]; then
+			git pull
+		elif [[ -d .svn ]]; then
+			svnversion
+			svn up
+		fi
+		cd ..
+		shift
+	done 2>&1 |less -r
+}
+
+# Δημιουργία συμβολικών συντομεύσεων για χρήση με το slackroll
+slup()
+{
+	SLACKROLL_DIR=/var/slackroll
+	MIRROR_DIR=/home/ftp/slackware64-current
+
+	(
+	cd $SLACKROLL_DIR
+	#rm -f packages/*
+	for lnk in packages/*; do
+		if [[ ! -e $lnk ]]; then
+			rm $lnk
+		fi
+	done
+
+	slackroll update
+	for pkg in $( slackroll remote-paths ); do
+		# if [[ -e $MIRROR_DIR/$pkg ]]; then
+		if [[ -e $MIRROR_DIR/$pkg && ! -e packages/$pkg:t ]]; then
+			ln -s $MIRROR_DIR/$pkg ./packages
+		fi
+	done
+	unset SLACKROLL_DIR MIRROR_DIR pkg lnk
+	)
+}
+
+# }}}
