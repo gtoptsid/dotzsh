@@ -1,6 +1,3 @@
-# /etc/profile: This file contains system-wide defaults used by
-# all Bourne (and related) shells.
-
 # Set the values for some environment variables:
 export MINICOM="-c on"
 export MANPATH=/usr/local/man:/usr/man
@@ -26,11 +23,6 @@ if [ "`id -u`" = "0" ]; then
   fi
 fi
 
-# I had problems with the backspace key using 'eval tset' instead of 'TERM=',
-# but you might want to try it anyway instead of the section below it.  I
-# think with the right /etc/termcap it would work.
-# eval `tset -sQ "$TERM"`
-
 # Set TERM to linux for unknown type or unset variable:
 if [ "$TERM" = "" -o "$TERM" = "unknown" ]; then
  TERM=linux
@@ -43,31 +35,11 @@ if [ "$SHELL" = "/bin/ksh" ]; then
 #  VISUAL=vi
 fi
 
-# Set a default shell prompt:
-#PS1='`hostname`:`pwd`# '
-if [ "$SHELL" = "/bin/pdksh" ]; then
- PS1='! $ '
-elif [ "$SHELL" = "/bin/ksh" ]; then
- PS1='! ${PWD/#$HOME/~}$ '
-elif [ "$SHELL" = "/bin/zsh" ]; then
- PS1='%n@%m:%~%# '
-elif [ "$SHELL" = "/bin/ash" ]; then
- PS1='$ '
-else
- PS1='\u@\h:\w\$ '
-fi
-PS2='> '
-export PATH DISPLAY LESS TERM PS1 PS2
+export PATH DISPLAY TERM
 
 # Default umask.  A umask of 022 prevents new files from being created group
 # and world writable.
 umask 022
-
-# Notify user of incoming mail.  This can be overridden in the user's
-# local startup file (~/.bash.login or whatever, depending on the shell)
-if [ -x /usr/bin/biff ]; then
- biff y 2> /dev/null
-fi
 
 # Append any additional sh scripts found in /etc/profile.d/:
 for profile_script in /etc/profile.d/*.sh ; do
