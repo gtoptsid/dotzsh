@@ -293,6 +293,12 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 #            τελευταία λύση σε περίπτωση που αποτύχει η έξυπνη συμπλήρωση
 zstyle ':completion:*' completer _complete _prefix _files
 
+# Η συμπλήρωση της εντολής cd δεν θα λαμβάνει υπόψην τον τρέχοντα κατάλογο
+# (εκτέλεση του cd ../<TAB> μέσα στον κατάλογο /usr δεν θα εμφανίσει τον /usr)
+# και τους γονικούς καταλόγους (εκτέλεση του cd foo/../<TAB> δεν θα εμφανίσει
+# τον foo)
+zstyle ':completion:*:*:cd:*' ignore-parents pwd parent
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
