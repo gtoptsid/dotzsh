@@ -321,6 +321,20 @@ zstyle ':completion:*:*:kill:*' command 'ps -u $USER -o pid,ppid,tname,args'
 # }}}
 zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
+# Το zsh χρησιμοποιεί τα αρχεία /etc/hosts και known_hosts του ssh για
+# συμπλήρωση hostnames. Μπορούμε όμως να παρακάμψουμε αυτή τη λειτουργία
+# και να δηλώσουμε χειροκίνητα τα hostnames που θέλουμε.
+
+# Δήλωση hostnames τα οποία θα χρησιμοποιούνται από οποιαδήποτε δικτυακή
+# εντολή (π.χ ping,nslookup,telnet,ssh)
+# myhosts=(hostname1 hostname2 hostname3)
+# zstyle ':completion:*:hosts' hosts $myhosts
+
+# Δήλωση usernames-hostnames τα οποία θα χρησιμοποιούνται από την εντολή ssh.
+# Σε περίπτωση που δηλωθεί παρακάμπτει για το ssh την hosts
+# myaccounts=(user1:host1 user2@host2)
+# zstyle ':completion:*:my-accounts' users-hosts $myaccounts
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
