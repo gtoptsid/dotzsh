@@ -6,16 +6,10 @@
 
 # Δήλωση μεταβλητών {{{
 
-export MINICOM="-c on"
 export MANPATH=/usr/local/man:/usr/man
 export HOSTNAME="`cat /etc/HOSTNAME`"
 export LESSOPEN="|lesspipe.sh %s"
 export LESS="-M"
-
-# If the user doesn't have a .inputrc, use the one in /etc.
-if [ ! -r "$HOME/.inputrc" ]; then
-  export INPUTRC=/etc/inputrc
-fi
 
 # Μεταβλητή PATH {{{
 
@@ -49,13 +43,6 @@ fi
 # Set TERM to linux for unknown type or unset variable:
 if [ "$TERM" = "" -o "$TERM" = "unknown" ]; then
  TERM=linux
-fi
-
-# Set ksh93 visual editing mode:
-if [ "$SHELL" = "/bin/ksh" ]; then
-  VISUAL=emacs
-#  VISUAL=gmacs
-#  VISUAL=vi
 fi
 
 export PATH DISPLAY TERM
