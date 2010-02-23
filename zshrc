@@ -69,6 +69,32 @@ bindkey "\e[3~" delete-char
 bindkey "\e[5~" beginning-of-history
 bindkey "\e[6~" end-of-history
 
+# Ctrl + Left/Right Arrow = Μετακίνηση μια λέξη αριστερά/δεξιά
+bindkey "\e[1;5D" backward-word
+bindkey "\e[1;5C" forward-word
+
+# Ctrl + Up/Down Arrow = Προηγούμενη/Επόμενη καταχώρηση ιστορικού
+# Τα Πάνω/Κάτω βέλη είναι συνδεδεμένα με τα up/down-line-or-history δηλαδή
+# όταν υπάρχει μια γραμμή στην γραμμή εντολών εμφανίζουν καταχωρήσεις στο
+# ιστορικό και όταν υπάρχουν πολλές γραμμές (π.χ for) μετακινούνται μέσα
+# στις γραμμές. Μερικές φορές όμως αυτή η λειτουργία είναι ενοχλητική
+# οπότε με ctrl + Πάνω/Κάτω βέλος αλλάζουμε γρήγορα καταχώρηση στο ιστορικό
+bindkey "\e[1;5A" up-history
+bindkey "\e[1;5B" down-history
+
+# Ctrl + Delete = Σβήνει μια λέξη αντί για ένα χαρακτήρα
+bindkey "\e[3;5~" delete-word
+# Shift + Delete = Σβήνει μια λέξη προς τα πίσω (ίδιο με Ctrl+W)
+bindkey "\e[3;2~" backward-delete-word
+# Ctrl + Insert = Αντιγράφει την προηγούμενη λέξη στην γραμμή εντολών
+# bindkey "\e[2;5~" copy-prev-word
+# Ctrl + Insert = Αντιγράφει την προηγούμενη λέξη στην γραμμή εντολών (όπου
+# λέξη δεν θεωρείται με βάση τα κενά αλλά επιλέγει ο parser)
+# Χρήσιμη για γρήγορες αλλαγές ονόματος π.χ mv Hello World.c <ctrl+insert>
+# μετατρέπεται σε mv Hello World.c Hello World.c οπότε μπορεί εύκολα να
+# αλλαχθεί το δεύτερο όνομα
+bindkey "\e[2;5~" copy-prev-shell-word
+
 # }}}
 
 # Δήλωση μεταβλητών {{{
