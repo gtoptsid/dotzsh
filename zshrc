@@ -245,6 +245,8 @@ compinit
 # Απενεργοποίηση του παλαιού τρόπου συμπλήρωσης
 zstyle ':completion:*' use-compctl false
 
+# zstyle ':completion:<function>:<completer>:<command>:<args>:<tag>'
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
