@@ -242,6 +242,10 @@ zmodload zsh/complist
 autoload -Uz compinit
 compinit
 
+# Η συμπλήρωση θα εμφανίζει τα αποτελέσματα με χρώμα ανάλογο του τύπου τους.
+# Τα χρώματα που θα χρησιμοποιηθούν θα είναι τα ίδια με της εντολής ls
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
 # Απενεργοποίηση του παλαιού τρόπου συμπλήρωσης
 zstyle ':completion:*' use-compctl false
 
