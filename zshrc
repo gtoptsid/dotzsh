@@ -335,6 +335,12 @@ zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*=0=01;31'
 # myaccounts=(user1:host1 user2@host2)
 # zstyle ':completion:*:my-accounts' users-hosts $myaccounts
 
+# Αγνόηση των δαιμόνων κατά την συμπλήρωση ονομάτων χρηστών εκτός
+# από την περίπτωση της εντολής chmod
+zstyle ':completion:*:*:(^chown):*:users' ignored-patterns adm apache bin \
+	daemon ftp games gdm haldaemon halt lp mail messagebus mysql news \
+	nobody operator oprofile pop rpc shutdown smmsp sshd sync uucp
+
 # }}}
 
 # Χρήσιμες συναρτήσεις # {{{
