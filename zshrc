@@ -181,7 +181,7 @@ alias lsed='ls -d *(/^F)'
 alias lssuid='ls -l *(s,S,t)'
 
 # Δημιουργία καταλόγου και αλλαγή σε αυτόν
-mcd () {
+mkcd () {
 	mkdir -p "$*"
 	cd "$*"
 }
