@@ -237,6 +237,11 @@ autoload -Uz run-help
 # και τους modifiers του zsh έτσι έχει πολύ περισσότερη δύναμη
 # autoload -U zmv
 
+# Εμφανίζει χρήσιμες πληροφορίες για repositories
+autoload -Uz vcs_info
+# Εκτός από την ήδη δηλωμένη precmd() θα εκτελούνται και οι συναρτήσεις
+# που ορίζονται στο array δηλαδή η vcs_info
+precmd_functions=(vcs_info)
 # }}}
 
 # Προγραμματιζόμενη συμπλήρωση # {{{
@@ -340,6 +345,25 @@ zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:*:(^chown):*:users' ignored-patterns adm apache bin \
 	daemon ftp games gdm haldaemon halt lp mail messagebus mysql news \
 	nobody operator oprofile pop rpc shutdown smmsp sshd sync uucp
+
+# Εμφάνιση του branch και της διεργασίας (πχ rebase) που εκτελείται καθώς
+# και πιθανών αλλαγών που υπάρχουν.
+zstyle ':vcs_info:*' actionformats '[%b|%a%c%u]'
+zstyle ':vcs_info:*' formats '[%b%c%u]'
+# Το string που θα εμφανίζεται όταν υπάρχουν unstaged αλλαγές (που δεν έχουν
+# ενωσματωθεί στο index με 'git add')
+zstyle ':vcs_info:*' unstagedstr ' U'
+# Το string που θα εμφανίζεται όταν υπάρχουν staged αλλαγές (που έχουν
+# ενωσματωθεί στο index με 'git add' αλλά δεν έχει γίνει commit)
+zstyle ':vcs_info:*' stagedstr ' S'
+# Θα γίνεται έλεγχος για αλλαγές (Κανονικά είναι απενεργοποιημένη γιατί σε
+# μεγάλα αποθετήρια μπορεί να χρειάζεται χρόνο για να λειτουργήσει. Χωρίς
+# αυτήν δεν θα εμφανίζονται οι αλλαγές ακόμα και αν έχουν δηλωθεί στο formats
+zstyle ':vcs_info:*' check-for-changes true
+# Ενεργοποίηση μόνο της υποστήριξης για το git
+zstyle ':vcs_info:*' enable git
+# Εμφάνιση των πληροφοριών για τα αποθετήρια στη δεξιά πλευρά
+RPROMPT='${vcs_info_msg_0_}'
 
 # }}}
 

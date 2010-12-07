@@ -107,6 +107,10 @@ if [[ -o rcs && -o globalrcs ]]; then
   # αποτρέπει αυτήν την λειτουργία.
   # setopt no_hup
 
+  # Ενεργοποιεί την επέκταση παραμέτρων μέσα στα prompt. Χρειάζεται
+  # για να λειτουργήσει το vcs_info.
+  setopt prompt_subst
+
 fi
 
 # }}}
