@@ -304,6 +304,10 @@ zstyle ':completion:*' completer _complete _prefix _files
 # τον foo)
 zstyle ':completion:*:*:cd:*' ignore-parents pwd parent
 
+# Αν ένα αρχείο βρίσκεται ήδη στη γραμμή εντολών τότε να μην εμφανίζεται
+# σαν πρόταση από τη συμπλήρωση
+zstyle ':completion:*:*:(cp|mv|rm):*' ignore-line other
+
 # Εφόσον τα αρχεία αντικειμένων (.o) και βιβλιοθηκών (.a και .so*) δεν είναι
 # αρχεία κειμένου εξαιρούνται από την εμφάνιση στην συμπλήρωση κειμενογράφων.
 zstyle ':completion:*:*:(vi|less|more):*' ignored-patterns '*.(o|a|so*)'
