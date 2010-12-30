@@ -388,6 +388,9 @@ pull()
 		elif [[ -d .svn ]]; then
 			svnversion
 			svn up
+		else
+			# Ίσως υπάρχουν υποκατάλογοι με αποθετήρια
+			pull *(/)
 		fi
 		cd ..
 		shift
