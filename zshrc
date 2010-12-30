@@ -379,8 +379,12 @@ pull()
 	while [[ -n $1 ]]; do
 		echo Processing $1
 		cd $1
-		if [[ -d .git ]]; then
-			git pull
+		if [[ $(git rev-parse --is-bare-repository 2>/dev/null) == "true" ]]; then
+			git fetch --all
+			git diff --stat --summary -M HEAD..origin/master
+			git update-ref refs/heads/master refs/remotes/origin/master
+		elif [[ -d .git ]]; then
+			git pull --all
 		elif [[ -d .svn ]]; then
 			svnversion
 			svn up
