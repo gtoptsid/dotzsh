@@ -379,7 +379,7 @@ RPROMPT='${vcs_info_msg_0_}'
 # Αναβάθμιση πολλών repositories ταυτόχρονα
 pull()
 {
-	while [[ -n $1 ]]; do
+	while [[ -d $1 ]]; do
 		echo Processing $1
 		cd $1
 		if [[ $(git rev-parse --is-bare-repository 2>/dev/null) == "true" ]]; then
