@@ -99,6 +99,7 @@ bindkey "\e[2;5~" copy-prev-shell-word
 # σε προηγούμενο στάδιο οπότε αλλάζουμε την συσχέτιση του TAB από
 # expand-or-complete σε complete-word
 # bindkey "^i" complete-word
+bindkey "^i" expand-or-complete-prefix
 
 # }}}
 
