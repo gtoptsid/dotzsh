@@ -385,12 +385,18 @@ pull()
 		cd $1
 		if [[ $(git rev-parse --is-bare-repository 2>/dev/null) == "true" ]]; then
 			git fetch --all
-			git diff --stat --summary -M HEAD..origin/master
+			GBRANCH=$(git symbolic-ref --short -q HEAD)
+			if [ $? != 0 ]; then
+				break
+			fi
+
+			git diff --stat --summary -M ${GBRANCH}..origin/${GBRANCH}
 			rm -f ORIG_HEAD
 			if git rev-parse --verify HEAD > /dev/null; then
 				git rev-parse --verify HEAD > ORIG_HEAD
 			fi
-			git update-ref refs/heads/master refs/remotes/origin/master
+			git update-ref refs/heads/${GBRANCH} refs/remotes/origin/${GBRANCH}
+			unset GBRANCH
 		elif [[ -d .git ]]; then
 			git pull --all
 		elif [[ -d .svn ]]; then
